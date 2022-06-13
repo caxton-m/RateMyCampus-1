@@ -1,0 +1,42 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Leave a Review{% endblock %}
+
+{% block content %}
+
+        <!--Create the restaurant dropdown -->
+        <h3>Select a restaurant below to leave a review:</h3>
+        <form method="post" class="form-group">
+            {% csrf_token %}
+        <div class="input-group mb-3">
+          <label class="input-group-text" for="inputGroupSelect01" >Restaurant</label>
+          <select class="form-select" id="inputGroupSelect01" name="review-restaurant">
+            {%  for option in options %}
+                <option class="dropdown-item" value={{ option }}>{{ option }}</option>
+            {% endfor %}
+          </select>
+        </div><br>
+
+        <!--Create the rating dropdown -->
+        <div class="input-group mb-3">
+          <label class="input-group-text" for="inputGroupSelect01">Rating</label>
+          <select class="form-select" id="inputGroupSelect01" name="review-rating">
+            {%  for i in '12345' %}
+                <option class="dropdown-item" value={{ i }}>{{ i }}</option>
+            {% endfor %}
+          </select>
+        </div><br>
+
+        <!--Create the review text box -->
+        <div class="row">
+            <div class="col-25">
+              <label style = "font-size: 20px;">Review:</label>
+            </div>
+            <div class="col-75">
+              <textarea id="review" name="review-text" placeholder="Type review here..." style="height:100px; width: 800px"></textarea>
+            </div>
+          </div>
+
+        <button type="submit" class="btn btn-success" name="leave_review_button"> Submit Review </button>
+    </form>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'main/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+    <!--Load the registration form from forms.py -->
+    <div class="content-section">
+        <form method="post" action="/signup/" class="form-group">
+            <legend class="border-bottom mb-3">Create an Account</legend>
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-success">Signup</button>
+        </form>
+    </div>
+{% endblock %}

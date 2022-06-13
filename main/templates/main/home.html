@@ -1,0 +1,27 @@
+{% extends 'main/base.html' %}
+
+<!--Check to see if the user is logged in, if so display their name -->
+{% block title %}
+    Hello,
+    {% if user.is_authenticated %}
+        {{user.first_name }}
+    {% else %}
+        please login
+    {% endif %}
+
+{% endblock %}
+
+<!--Create the home page layout-->
+{% block content %}
+
+        <h2 style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 60px; text-align: center;">
+                Rate my Campus
+        </h2>
+
+        <h3 style="font-family:Georgia, 'Times New Roman', Times, serif; font-size: 25px; text-align:center;">
+                Rate my campus allows users to explore reviews of restaurants around campus and leave their own reviews. Click one of the links above to get started
+        </h3>
+
+
+
+{% endblock %}

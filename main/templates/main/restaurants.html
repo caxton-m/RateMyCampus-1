@@ -1,0 +1,26 @@
+{% extends 'main/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Add Restaurant{% endblock %}
+
+{% block content %}
+
+    <!--Display the restaurants from the database -->
+    <div class="content-section">
+        <form method="post" action="/restaurants/" class="form-group">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-success" name="add_restaurant_button"> Add Restaurant </button>
+        </form>
+    </div>
+
+
+
+{% endblock %}
+
+    <div class="restaurants">
+
+        {% autoescape off %}
+            {{restaurants.to_html}}
+        {% endautoescape %}
+    </div>

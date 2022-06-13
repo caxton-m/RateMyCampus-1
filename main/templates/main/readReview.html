@@ -1,0 +1,56 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Explore Reviews{% endblock %}
+
+{% block content %}
+    <form method="post" action="/readReview/">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <h3>Select a restaurant to read reviews:</h3>
+
+        <!--Create the restaurant dropdown-->
+        <form method="post" class="form-group">
+        <div class="input-group mb-3">
+          <label class="input-group-text" for="inputGroupSelect01">Restaurant</label>
+          <select class="form-select" id="inputGroupSelect01" name="review_search">
+            {%  for option in options %}
+                    <option class="dropdown-item" value={{ option }}>{{ option }}</option>
+            {% endfor %}
+          </select>
+          <button type="submit" class="btn btn-success">Submit</button>
+        </div>
+        </form>
+
+        </div>
+        <!--Create the table to display the reviews -->
+        <div class="table-responsive">
+          <table class="table table-hover">
+                <!--Set the header of the table -->
+              <thead>
+                <tr>
+                  <td class="number text-center"><strong>ID</strong></td>
+                  <td class="product"><strong>Review</strong><br></td>
+                  <td class="address"><span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></span></td>
+                  <td class="address"><strong>Rating</strong></td>
+                    <td class="address"><strong>Created by</strong></td>
+                    <td class="address"><strong>Date</strong></td>
+                </tr>
+              </thead>
+                <!--Fill in the entries for the table -->
+              <tbody>
+                    {% for review in reviews %}
+                    <tr>
+                      <td class="number text-center">{{ review.id }}</td>
+                      <td class="product"><strong> {{ review.text }} </strong><br></td>
+                      <td class="address"><span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></span></td>
+                      <td class="address">{{ review.rating }}</td>
+                    <td class="address">{{ review.created_by.first_name }} {{ review.created_by.last_name }}</td>
+                    <td class="address">{{ review.date }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+          </table>
+        </div>
+
+    </form>
+{% endblock %}
